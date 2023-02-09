@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import { RequiredAuth } from "../Components/RequiredAuth";
 import Addproduct from "./Addproduct";
 import Cart from "./Cart";
 import EditProduct from "./EditProduct";
@@ -12,7 +13,7 @@ export const MainRoutes = () => {
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/Addproduct" element={<Addproduct />} />
+        <Route path="/Addproduct" element={<RequiredAuth><Addproduct /></RequiredAuth>} />
         <Route path="/Productpage/:productId" element={<Productpage />} />
         <Route path="/Productpage/:productId/edit" element={<EditProduct />} />
         <Route path="/login" element={<Login />} />

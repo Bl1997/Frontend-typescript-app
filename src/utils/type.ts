@@ -25,3 +25,8 @@ export interface Order{
     quantity:number;
     productId:number;
 }
+
+export interface LoginData{
+    email:string;
+    password:string;
+}
