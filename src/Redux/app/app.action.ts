@@ -32,7 +32,7 @@ export const GetProductSuccess = (data: Product[]): IGetproductSuccess => {
 };
 
 export const getProducts =
-  (GetProductsParams: { params: { category: string[] } }): any =>
+  (GetProductsParams?: { params: { category: string[] } }): any =>
   async (dispatch: AppDispatch) => {
     dispatch(ProductRequset());
 
