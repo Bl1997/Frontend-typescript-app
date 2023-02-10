@@ -31,16 +31,18 @@ export const GetProductSuccess = (data: Product[]): IGetproductSuccess => {
   return { type: GET_PRODUCT_SUCCESS, payload: data };
 };
 
-export const getProducts = ():any => async (dispatch: AppDispatch) => {
-  dispatch(ProductRequset());
+export const getProducts =
+  (GetProductsParams: { params: { category: string[] } }): any =>
+  async (dispatch: AppDispatch) => {
+    dispatch(ProductRequset());
 
-  try {
-    let data = await getProductAPI();
+    try {
+      let data = await getProductAPI(GetProductsParams);
 
-    if (data) {
-      dispatch(GetProductSuccess(data));
+      if (data) {
+        dispatch(GetProductSuccess(data));
+      }
+    } catch (error) {
+      dispatch(ProductError());
     }
-  } catch (error) {
-    dispatch(ProductError());
-  }
-};
+  };
