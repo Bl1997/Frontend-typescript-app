@@ -1,9 +1,10 @@
 import { Product } from "../../utils/type";
-import { getProductAPI } from "./app.api";
+import { getProductAPI, updateProductAPI } from "./app.api";
 import {
   GET_PRODUCT_SUCCESS,
   PRODUCT_ERROR,
   PRODUCT_REQUEST,
+  UPDATE_PRODUCT_SUCCESS,
 } from "./app.type";
 import { AppDispatch } from "../store";
 
@@ -18,7 +19,7 @@ export interface IGetproductSuccess {
   payload: Product[];
 }
 
-export type AppAction = IproductRequest | IproductError | IGetproductSuccess;
+export type AppAction = IproductRequest | IproductError | IGetproductSuccess|IupdateProductSuccess;
 
 export const ProductRequset = (): IproductRequest => {
   return { type: PRODUCT_REQUEST };
@@ -44,5 +45,29 @@ export const getProducts =
       }
     } catch (error) {
       dispatch(ProductError());
+    }
+  };
+
+export interface IupdateProductSuccess {
+  type: typeof UPDATE_PRODUCT_SUCCESS;
+  payload: Product;
+}
+
+const updateProductSuccess = (payload: Product): IupdateProductSuccess => {
+  return { type: UPDATE_PRODUCT_SUCCESS, payload };
+};
+
+export const UpdateProduct =
+  (id: number, payload: { title: string; price: number }):any =>
+  async (dispatch:AppDispatch) => {
+    dispatch(ProductRequset())
+    try {
+      let data=await updateProductAPI(id,payload)
+      if(data){
+        dispatch(updateProductSuccess(data))
+      }
+    } catch (error) {
+      dispatch(ProductError())
+      
     }
   };

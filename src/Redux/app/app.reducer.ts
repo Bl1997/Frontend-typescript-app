@@ -4,6 +4,7 @@ import {
   GET_PRODUCT_SUCCESS,
   PRODUCT_ERROR,
   PRODUCT_REQUEST,
+  UPDATE_PRODUCT_SUCCESS,
 } from "./app.type";
 
 export interface Appstate {
@@ -33,6 +34,13 @@ export const reducer = (
     }
     case PRODUCT_ERROR: {
       return { ...state, isLoading: false, isError: true };
+    }
+    case UPDATE_PRODUCT_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+        data: state.data.map((product)=>product.id===action.payload.id ? action.payload:product)
+      };
     }
 
     default: {

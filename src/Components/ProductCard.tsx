@@ -79,13 +79,13 @@ function ProductCard({ id, title, price, image }: Product) {
           />
         )}
 
-        <Image
+       <Link to={`/Productpage/${id}`}> <Image
           boxSize={"300px"}
           src={image}
           alt={`Picture of ${title}`}
           roundedTop="lg"
           justifyContent={"center"}
-        />
+        /></Link>
 
         <Box p="6">
           <Box display="flex" alignItems="baseline">
